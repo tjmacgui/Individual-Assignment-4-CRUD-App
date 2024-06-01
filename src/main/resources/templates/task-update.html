@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Task</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Update Task</h1>
+    <form th:action="@{/tasks/update/{id}(id=${task.taskId})}" th:method="post">
+        <input type="hidden" id="editGoalId" name="goalId" th:value="${goal.goalId}" />
+        <input type="hidden" id="editTaskId" name="taskId" th:value="${task.taskId}" />
+        <div class="form-group">
+            <label for="editTitle">Title</label>
+            <input type="text" id="editTitle" name="title" class="form-control" th:value="${task.title}" required>
+        </div>
+        <div class="form-group">
+            <label for="editDetails">Details</label>
+            <textarea id="editDetails" name="details" class="form-control" th:text="${task.details}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="editStatus">Status</label>
+            <select id="editStatus" name="status" class="form-control" th:value="${task.status}">
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Done</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <a th:href="@{/tasks/{goalId}(goalId=${goal.goalId})}" class="btn btn-secondary mt-3">Back to Tasks</a>
+</div>
+</body>
+</html>
